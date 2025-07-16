@@ -27,16 +27,17 @@ autoinstall:
     - firefox
     - firefox-locale-pt
     - google-chrome-stable
+    - anydesk
+    - gnome-disk-utility
   codecs:
     install: true
   drivers:
     install: true
   late-commands:
-    - curtin in-target --target=/target apt update
-    - curtin in-target --target=/target apt install -y anydesk
     - curtin in-target --target=/target apt remove --purge -y gnome-keyring
-    - curtin in-target --target=/target wget https://github.com/rustdesk/rustdesk/releases/download/1.4.0/rustdesk-1.4.0-x86_64.deb && dpkg -i rustdesk-1.4.0-x86_64.deb && apt install -f
-    - curtin in-target --target=/target apt install -y gnome-disk-utility
+    - curtin in-target --target=/target wget -qO /tmp/rustdesk.deb https://github.com/rustdesk/rustdesk/releases/download/1.4.0/rustdesk-1.4.0-x86_64.deb
+    - curtin in-target --target=/target apt install -y /tmp/rustdesk.deb
+    - curtin in-target --target=/target apt update
     - echo "autologin-user=aluno" >> /etc/lightdm/lightdm.conf
     - echo "autologin-user=aluno" >> /etc/lightdm/lightdm.conf.d/lightdm.conf
     - echo "autologin-timeout=0" >> /etc/lightdm/lightdm.conf
