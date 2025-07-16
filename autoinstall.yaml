@@ -3,7 +3,6 @@ autoinstall:
   locale: pt_BR
   keyboard:
     layout: br
-    model: pc105
   timezone: America/Fortaleza
   user-data:
     users:
@@ -47,21 +46,7 @@ autoinstall:
     - echo "[Seat:*]" > /target/etc/lightdm/lightdm.conf.d/99-autologin.conf
     - echo "autologin-user=aluno" >> /target/etc/lightdm/lightdm.conf.d/99-autologin.conf
 
-    - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<channel name="xfce4-power-manager" version="1.0">
-  <property name="blank-on-ac" type="int" value="0"/>
-  <property name="dpms-enabled" type="bool" value="false"/>
-  <property name="inactivity-sleep-mode-on-ac" type="uint" value="0"/>
-</channel>
-EOF'
-
-    - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screensaver.xml <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<channel name="xfce4-screensaver" version="1.0">
-  <property name="enabled" type="bool" value="false"/>
-</channel>
-EOF'
-
+    - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml <<EOF <?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-power-manager" version="1.0">  <property name="blank-on-ac" type="int" value="0"/>  <property name="dpms-enabled" type="bool" value="false"/>  <property name="inactivity-sleep-mode-on-ac" type="uint" value="0"/></channel> EOF'
+    - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screensaver.xml <<EOF <?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-screensaver" version="1.0">  <property name="enabled" type="bool" value="false"/></channel> EOF'
     - curtin in-target --target=/target chown -R aluno:aluno /home/aluno/.config
   shutdown: reboot
