@@ -12,7 +12,7 @@ autoinstall:
         primary_group: adm
         groups: [adm, sudo]
         lock_passwd: false
-        passwd: "$6$kP3QkL2x$QU3PpiE5L4IOGhd2XLW1b7sy9Xr9TyzsxUQxRNgqOX5PQUvaTOHtBl/FPZJXyd0a6twFPrDa9gOaBfD6CNvIj."
+        passwd: "*Sup0rt3@CR3D3"
 
       - name: aluno
         gecos: Aluno
@@ -20,7 +20,7 @@ autoinstall:
         primary_group: users
         groups: [users]
         lock_passwd: false
-        passwd: "$6$rTkA7uLh$GZNR6JvUnsnD4czKPIHv1eFSQniSzxuG4Xn2fr3FwAOir9WjDCkvo8GEKDqypYuN/zcfEFxFTOSYYw3h2GFVs1"
+        passwd: "aluno"
   storage:
     layout:
       name: direct
