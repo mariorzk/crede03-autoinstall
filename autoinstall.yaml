@@ -18,55 +18,34 @@ autoinstall:
         groups: [users]
         lock_passwd: False
         password: '$6$rTkA7uLh$GZNR6JvUnsnD4czKPIHv1eFSQniSzxuG4Xn2fr3FwAOir9WjDCkvo8GEKDqypYuN/zcfEFxFTOSYYw3h2GFVs1'
-
   storage:
     layout:
       name: direct
-
   packages:
     - epoptes-client
     - openssh-server
     - firefox
     - firefox-locale-pt
-    - google-chrome-stable
-    
+    - google-chrome-stable    
   autoinstall:
     codecs:
       install: true
     drivers:
       install: true
-
   late-commands:
-    # Atualiza repositórios
     - curtin in-target --target=/target apt update
-
-    # Instala o AnyDesk
     - curtin in-target --target=/target apt install -y anydesk
-
-    # Desinstalar o gnome-keyring
     - curtin in-target --target=/target apt remove --purge -y gnome-keyring
-
-    # Instala o Rustdesk
     - curtin in-target --target=/target wget https://github.com/rustdesk/rustdesk/releases/download/1.4.0/rustdesk-1.4.0-x86_64.deb && dpkg -i rustdesk-1.4.0-x86_64.deb && apt install -f
-
-    # Instala o Gerenciador de Discos
     - curtin in-target --target=/target apt install -y gnome-disk-utility
-
-    # Ativar login automático para o usuário aluno
     - echo "autologin-user=aluno" >> /etc/lightdm/lightdm.conf
     - echo "autologin-user=aluno" >> /etc/lightdm/lightdm.conf.d/lightdm.conf
     - echo "autologin-timeout=0" >> /etc/lightdm/lightdm.conf
     - echo "autologin-timeout=0" >> /etc/lightdm/lightdm.conf.d/lightdm.conf
-
-    # Desativar opções de eneria para o usuário aluno
     - curtin in-target --target=/target mkdir -p /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml
     - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml <<EOF <?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-power-manager" version="1.0">  <property name="xfce4-power-manager" type="empty">    <property name="power-button-action" type="empty"/>    <property name="lock-screen-suspend-hibernate" type="bool" value="false"/>    <property name="logind-handle-lid-switch" type="empty"/>    <property name="blank-on-ac" type="int" value="0"/>    <property name="blank-on-battery" type="empty"/>    <property name="dpms-enabled" type="bool" value="false"/>    <property name="dpms-on-ac-sleep" type="uint" value="0"/>    <property name="dpms-on-ac-off" type="uint" value="0"/>    <property name="dpms-on-battery-sleep" type="empty"/>    <property name="dpms-on-battery-off" type="empty"/>    <property name="show-panel-label" type="empty"/>    <property name="inactivity-sleep-mode-on-ac" type="empty"/>    <property name="inactivity-sleep-mode-on-battery" type="empty"/>    <property name="show-tray-icon" type="bool" value="false"/>  </property></channel> EOF'
-
-    # Desativar o protetor de tela para o usuário aluno.
     - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screensaver.xml <<EOF <?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-screensaver" version="1.0">  <property name="saver" type="empty">    <property name="mode" type="int" value="0"/>    <property name="idle-activation" type="empty">      <property name="enabled" type="bool" value="false"/>    </property>    <property name="enabled" type="bool" value="false"/>  </property>  <property name="lock" type="empty">    <property name="user-switching" type="empty">      <property name="enabled" type="bool" value="false"/>    </property>    <property name="status-messages" type="empty">      <property name="enabled" type="bool" value="false"/>    </property>    <property name="sleep-activation" type="bool" value="false"/>    <property name="saver-activation" type="empty">      <property name="enabled" type="bool" value="false"/>    </property>    <property name="enabled" type="bool" value="false"/>  </property></channel> EOF'
-
-    # Configura senha padrão para o Rustdesk.
-     - curtin in-target --target=/target mkdir -p /home/aluno/.config/rustdesk
+    - curtin in-target --target=/target mkdir -p /home/aluno/.config/rustdesk
     - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/rustdesk/RustDesk.toml <<EOF password = '00FUCiscH4GEf27ecLxNIAZio+e+p5pMSY' EOF'
 
     # Corrigir permissões
