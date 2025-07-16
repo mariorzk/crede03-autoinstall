@@ -50,24 +50,9 @@ autoinstall:
     - curtin in-target --target=/target apt install -y /tmp/rustdesk.deb
     - curtin in-target --target=/target apt update
     - curtin in-target --target=/target apt install -y gnome-disk-utility
-
     - curtin in-target --target=/target mkdir -p /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml
-    - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<channel name="xfce4-power-manager" version="1.0">
-  <property name="blank-on-ac" type="int" value="0"/>
-  <property name="dpms-enabled" type="bool" value="false"/>
-  <property name="inactivity-sleep-mode-on-ac" type="uint" value="0"/>
-</channel>
-EOF'
-
-    - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screensaver.xml <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<channel name="xfce4-screensaver" version="1.0">
-  <property name="enabled" type="bool" value="false"/>
-</channel>
-EOF'
-
+    - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml <<EOF<?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-power-manager" version="1.0"><property name="blank-on-ac" type="int" value="0"/><property name="dpms-enabled" type="bool" value="false"/><property name="inactivity-sleep-mode-on-ac" type="uint" value="0"/></channel>EOF'
+    - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screensaver.xml <<EOF<?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-screensaver" version="1.0"><property name="enabled" type="bool" value="false"/></channel>EOF'
     - curtin in-target --target=/target chown -R aluno:aluno /home/aluno/.config
 
   shutdown: reboot
