@@ -16,8 +16,8 @@ autoinstall:
         shell: /bin/bash
         primary_group: users
         groups: [users]
-        lock_passwd: False
-        password: "$6$rTkA7uLh$GZNR6JvUnsnD4czKPIHv1eFSQniSzxuG4Xn2fr3FwAOir9WjDCkvo8GEKDqypYuN/zcfEFxFTOSYYw3h2GFVs1"
+        lock_passwd: false
+        passwd: "$6$rTkA7uLh$GZNR6JvUnsnD4czKPIHv1eFSQniSzxuG4Xn2fr3FwAOir9WjDCkvo8GEKDqypYuN/zcfEFxFTOSYYw3h2GFVs1"
   storage:
     layout:
       name: direct
