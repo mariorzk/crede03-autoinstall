@@ -4,23 +4,23 @@ autoinstall:
   keyboard:
     layout: br
   timezone: America/Fortaleza
-  user-data:
-    users:
-      - name: administrador
-        gecos: Administrador
-        shell: /bin/bash
-        primary_group: adm
-        groups: [adm, sudo]
-        lock_passwd: false
-        passwd: "*Sup0rt3@CR3D3"
+  # user-data:
+  #   users:
+  #     - name: administrador
+  #       gecos: Administrador
+  #       shell: /bin/bash
+  #       primary_group: adm
+  #       groups: [adm, sudo]
+  #       lock_passwd: false
+  #       passwd: "*Sup0rt3@CR3D3"
 
-      - name: aluno
-        gecos: Aluno
-        shell: /bin/bash
-        primary_group: users
-        groups: [users]
-        lock_passwd: false
-        passwd: "aluno"
+  #     - name: aluno
+  #       gecos: Aluno
+  #       shell: /bin/bash
+  #       primary_group: users
+  #       groups: [users]
+  #       lock_passwd: false
+  #       passwd: "aluno"
   storage:
     layout:
       name: direct
