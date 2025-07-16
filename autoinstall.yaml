@@ -6,9 +6,9 @@ autoinstall:
   timezone: America/Fortaleza
   identity:
     hostname: xubuntu-cr03
-    realname: 'Administrador'
+    realname: "Administrador"
     username: administrador
-    password: '$6$kP3QkL2x$QU3PpiE5L4IOGhd2XLW1b7sy9Xr9TyzsxUQxRNgqOX5PQUvaTOHtBl/FPZJXyd0a6twFPrDa9gOaBfD6CNvIj.'
+    password: "$6$kP3QkL2x$QU3PpiE5L4IOGhd2XLW1b7sy9Xr9TyzsxUQxRNgqOX5PQUvaTOHtBl/FPZJXyd0a6twFPrDa9gOaBfD6CNvIj."
   user-data:
     users:
       - name: aluno
@@ -17,7 +17,7 @@ autoinstall:
         primary_group: users
         groups: [users]
         lock_passwd: False
-        password: '$6$rTkA7uLh$GZNR6JvUnsnD4czKPIHv1eFSQniSzxuG4Xn2fr3FwAOir9WjDCkvo8GEKDqypYuN/zcfEFxFTOSYYw3h2GFVs1'
+        password: "$6$rTkA7uLh$GZNR6JvUnsnD4czKPIHv1eFSQniSzxuG4Xn2fr3FwAOir9WjDCkvo8GEKDqypYuN/zcfEFxFTOSYYw3h2GFVs1"
   storage:
     layout:
       name: direct
@@ -26,7 +26,7 @@ autoinstall:
     - openssh-server
     - firefox
     - firefox-locale-pt
-    - google-chrome-stable    
+    - google-chrome-stable
   autoinstall:
     codecs:
       install: true
