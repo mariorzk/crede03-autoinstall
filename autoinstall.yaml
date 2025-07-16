@@ -27,11 +27,10 @@ autoinstall:
     - firefox
     - firefox-locale-pt
     - google-chrome-stable
-  autoinstall:
-    codecs:
-      install: true
-    drivers:
-      install: true
+  codecs:
+    install: true
+  drivers:
+    install: true
   late-commands:
     - curtin in-target --target=/target apt update
     - curtin in-target --target=/target apt install -y anydesk
