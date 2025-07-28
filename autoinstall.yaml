@@ -8,40 +8,32 @@ autoinstall:
     hostname: xubuntu-cr03
     realname: "Administrador"
     username: administrador
-    password: "$6$kP3QkL2x$QU3PpiE5L4IOGhd2XLW1b7sy9Xr9TyzsxUQxRNgqOX5PQUvaTOHtBl/FPZJXyd0a6twFPrDa9gOaBfD6CNvIj."
-  user-data:
-    users:
-      - name: aluno
-        gecos: Aluno
-        shell: /bin/bash
-        primary_group: users
-        groups: [users]
-        lock_passwd: false
-        passwd: "$6$rTkA7uLh$GZNR6JvUnsnD4czKPIHv1eFSQniSzxuG4Xn2fr3FwAOir9WjDCkvo8GEKDqypYuN/zcfEFxFTOSYYw3h2GFVs1"
+    password: "$6$LzWZ5GpNYeWUSQS2$Q27nW8WrDtmSXxymEqi/8VvgZ7pSGvNtgxX3dhDsfAbhQpOZoO76ZVgcqvDR5J1Ep9hOgM.g/sH6Kt8tWJ.pT."
   storage:
     layout:
       name: direct
   packages:
-    - epoptes-client
     - openssh-server
     - firefox
     - firefox-locale-pt
     - google-chrome-stable
     - anydesk
     - gnome-disk-utility
+    - libxdo3
   codecs:
     install: true
   drivers:
     install: true
   late-commands:
+    - curtin in-target --target=/target adduser --disabled-password --gecos "Aluno" aluno
+    - curtin in-target --target=/target usermod -aG users aluno
+    - curtin in-target --target=/target bash -c 'echo "aluno:aluno" | chpasswd'
+    - echo "autologin-user=aluno" >> /etc/lightdm/lightdm.conf
+    - echo "autologin-timeout=0" >> /etc/lightdm/lightdm.conf
     - curtin in-target --target=/target apt remove --purge -y gnome-keyring
     - curtin in-target --target=/target wget -qO /tmp/rustdesk.deb https://github.com/rustdesk/rustdesk/releases/download/1.4.0/rustdesk-1.4.0-x86_64.deb
     - curtin in-target --target=/target apt install -y /tmp/rustdesk.deb
     - curtin in-target --target=/target apt update
-    - echo "autologin-user=aluno" >> /etc/lightdm/lightdm.conf
-    - echo "autologin-user=aluno" >> /etc/lightdm/lightdm.conf.d/lightdm.conf
-    - echo "autologin-timeout=0" >> /etc/lightdm/lightdm.conf
-    - echo "autologin-timeout=0" >> /etc/lightdm/lightdm.conf.d/lightdm.conf
     - curtin in-target --target=/target mkdir -p /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml
     - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml <<EOF <?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-power-manager" version="1.0">  <property name="xfce4-power-manager" type="empty">    <property name="power-button-action" type="empty"/>    <property name="lock-screen-suspend-hibernate" type="bool" value="false"/>    <property name="logind-handle-lid-switch" type="empty"/>    <property name="blank-on-ac" type="int" value="0"/>    <property name="blank-on-battery" type="empty"/>    <property name="dpms-enabled" type="bool" value="false"/>    <property name="dpms-on-ac-sleep" type="uint" value="0"/>    <property name="dpms-on-ac-off" type="uint" value="0"/>    <property name="dpms-on-battery-sleep" type="empty"/>    <property name="dpms-on-battery-off" type="empty"/>    <property name="show-panel-label" type="empty"/>    <property name="inactivity-sleep-mode-on-ac" type="empty"/>    <property name="inactivity-sleep-mode-on-battery" type="empty"/>    <property name="show-tray-icon" type="bool" value="false"/>  </property></channel> EOF'
     - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screensaver.xml <<EOF <?xml version="1.0" encoding="UTF-8"?><channel name="xfce4-screensaver" version="1.0">  <property name="saver" type="empty">    <property name="mode" type="int" value="0"/>    <property name="idle-activation" type="empty">      <property name="enabled" type="bool" value="false"/>    </property>    <property name="enabled" type="bool" value="false"/>  </property>  <property name="lock" type="empty">    <property name="user-switching" type="empty">      <property name="enabled" type="bool" value="false"/>    </property>    <property name="status-messages" type="empty">      <property name="enabled" type="bool" value="false"/>    </property>    <property name="sleep-activation" type="bool" value="false"/>    <property name="saver-activation" type="empty">      <property name="enabled" type="bool" value="false"/>    </property>    <property name="enabled" type="bool" value="false"/>  </property></channel> EOF'
