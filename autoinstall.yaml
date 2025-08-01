@@ -21,11 +21,6 @@ autoinstall:
         groups: [users]
         lock_passwd: false
         passwd: "$6$ERVS1XMCn/pLbSer$KFvofTI4vzJlWuVVdiPkikGcQG2GuBNvX1E/yCf8dMAOYyvpvAAQBqqbUd4HtDpI50xTKk5yZmublNZLl/sy9/"
-        sudo: ""
-        system: false
-        no_create_home: false
-        uid: 1001
-        home: /home/aluno
   packages:
     - openssh-server
     - firefox
