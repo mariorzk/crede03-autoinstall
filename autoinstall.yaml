@@ -94,7 +94,7 @@ autoinstall:
       EOF"
     - curtin in-target --target=/target mkdir -p /home/aluno/.config/rustdesk
     - curtin in-target --target=/target sh -c "cat > /home/aluno/.config/rustdesk/RustDesk.toml <<EOF
-password = '00FUCiscH4GEf27ecLxNIAZio+e+p5pMSY'
-EOF"
+      password = '00FUCiscH4GEf27ecLxNIAZio+e+p5pMSY'
+      EOF"
     - curtin in-target --target=/target chown -R aluno:aluno /home/aluno/.config
     - curtin in-target --target=/target sh -c 'apt-get remove --purge -y gnome-keyring'
