@@ -36,9 +36,7 @@ autoinstall:
   late-commands:
     - echo "autologin-user=aluno" >> /etc/lightdm/lightdm.conf
     - echo "autologin-timeout=0" >> /etc/lightdm/lightdm.conf
-    - curtin in-target --target=/target apt remove gnome-keyring
-    - curtin in-target --target=/target wget -O /tmp/rustdesk.deb https://github.com/rustdesk/rustdesk/releases/download/1.4.0/rustdesk-1.4.0-x86_64.deb
-    - curtin in-target --target=/target dpkg -i /tmp/rustdesk.deb -y
+    - curtin in-target --target=/target bash -c 'wget -O /tmp/rustdesk.deb https://github.com/rustdesk/rustdesk/releases/download/1.4.0/rustdesk-1.4.0-x86_64.deb && dpkg -i /tmp/rustdesk.deb -y'
     - curtin in-target --target=/target mkdir -p /home/aluno/.config/xfce4/xfconf/xfce-perchannel-xml
     - curtin in-target --target=/target bash -c 'cat > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml <<EOF 
         <?xml version="1.0" encoding="UTF-8"?>
@@ -89,3 +87,4 @@ autoinstall:
     - curtin in-target --target=/target mkdir -p /home/aluno/.config/rustdesk
     - curtin in-target --target=/target bash -c 'cat > /home/aluno/.config/rustdesk/RustDesk.toml <<EOF password = '00FUCiscH4GEf27ecLxNIAZio+e+p5pMSY' EOF'
     - curtin in-target --target=/target chown -R aluno:aluno /home/aluno/.config
+    - curtin in-target --target=/target bash -c 'apt remove --purge gnome-keyring -y'
