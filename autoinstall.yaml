@@ -24,8 +24,6 @@ autoinstall:
         sudo: ""
         system: false
         no_create_home: false
-        ssh_import_id: []
-        ssh_authorized_keys: []
         uid: 1001
         home: /home/aluno
   packages:
