@@ -37,9 +37,9 @@ autoinstall:
   late-commands:
     - echo "autologin-user=aluno" >> /target/etc/lightdm/lightdm.conf
     - echo "autologin-timeout=0" >> /target/etc/lightdm/lightdm.conf
-    - curtin in-target --target=/target /bin/bash -c 'wget -O /tmp/rustdesk.deb https://github.com/rustdesk/rustdesk/releases/download/1.4.0/rustdesk-1.4.0-x86_64.deb && apt install -y /tmp/rustdesk.deb'
-    - curtin in-target --target=/target mkdir -p /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
-    - curtin in-target --target=/target /bin/bash -c "cat > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml <<EOF
+    - curtin in-target --target=/target /bin/bash 'wget -O /tmp/rustdesk.deb https://github.com/rustdesk/rustdesk/releases/download/1.4.0/rustdesk-1.4.0-x86_64.deb && apt install -y /tmp/rustdesk.deb'
+    - curtin in-target --target=/target mkdir /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
+    - curtin in-target --target=/target /bin/bash "cat > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml <<EOF
       <?xml version=\"1.0\" encoding=\"UTF-8\"?>
       <channel name=\"xfce4-power-manager\" version=\"1.0\">
         <property name=\"xfce4-power-manager\" type=\"empty\">
@@ -60,7 +60,7 @@ autoinstall:
         </property>
       </channel>
       EOF"
-    - curtin in-target --target=/target /bin/bash -c "cat > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screensaver.xml <<EOF
+    - curtin in-target --target=/target /bin/bash "cat > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screensaver.xml <<EOF
       <?xml version=\"1.0\" encoding=\"UTF-8\"?>
       <channel name=\"xfce4-screensaver\" version=\"1.0\">
         <property name=\"saver\" type=\"empty\">
@@ -85,9 +85,9 @@ autoinstall:
         </property>
       </channel>
       EOF"
-    - curtin in-target --target=/target mkdir -p /home/aluno/.config/rustdesk
-    - curtin in-target --target=/target /bin/bash -c "cat > /home/aluno/.config/rustdesk/RustDesk.toml <<EOF
+    - curtin in-target --target=/target mkdir /home/aluno/.config/rustdesk
+    - curtin in-target --target=/target /bin/bash "cat > /home/aluno/.config/rustdesk/RustDesk.toml <<EOF
       password = '00FUCiscH4GEf27ecLxNIAZio+e+p5pMSY'
       EOF"
     - curtin in-target --target=/target chown -R aluno:aluno /home/aluno/.config
-    - curtin in-target --target=/target /bin/bash -c 'apt-get remove --purge -y gnome-keyring'
+    - curtin in-target --target=/target /bin/bash 'apt-get remove --purge -y gnome-keyring'
